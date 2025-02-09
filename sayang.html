@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100vh;
+        }
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 10px;
+        }
+        .envelope {
+            width: 120px;
+            height: 100px;
+            background: url('envelope.png') no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+        .open {
+            transform: rotateX(180deg);
+            opacity: 0;
+        }
+        .frame {
+            border: 5px solid white;
+            box-shadow: 0px 0px 10px gray;
+            border-radius: 10px;
+            overflow: hidden;
+            width: auto;
+            max-width: 90%;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .frame img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+        .button-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .play-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+        .cassette {
+            width: 80px;
+            height: 50px;
+            background: url('cassette.png') no-repeat center center;
+            background-size: contain;
+            display: none;
+            margin-left: 15px;
+        }
+        .rotate {
+            animation: spin 2s linear infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let password = "sayang";
+        let userInput = prompt("Nak password ke baby?!:");
+        
+        if (userInput !== password) {
+            alert("Wrong password! Try again later.");
+            window.location.href = "https://www.google.com";
+        }
+
+        function openEnvelope(index) {
+            const envelope = document.getElementById("envelope-" + index);
+            const frame = document.getElementById("frame-" + index);
+            envelope.classList.add("open");
+            setTimeout(() => {
+                envelope.style.display = "none";
+                frame.style.display = "block";
+            }, 500);
+        }
+
+        function playAudio() {
+            document.getElementById("bg-music").play();
+            const cassette = document.getElementById("cassette");
+            cassette.style.display = "block";
+            cassette.classList.add("rotate");
+        }
+    </script>
+    
+    <h1>You will always be my sayangg !</h1>
+    
+    <div class="gallery">
+        <div onclick="openEnvelope(1)" id="envelope-1" class="envelope"></div>
+        <div id="frame-1" class="frame"><img src="ada.jpg" alt="My Love"></div>
+
+        <div onclick="openEnvelope(2)" id="envelope-2" class="envelope"></div>
+        <div id="frame-2" class="frame"><img src="ada2.jpg" alt="My Love"></div>
+
+        <div onclick="openEnvelope(3)" id="envelope-3" class="envelope"></div>
+        <div id="frame-3" class="frame"><img src="ada3.jpg" alt="My Love"></div>
+
+        <div onclick="openEnvelope(4)" id="envelope-4" class="envelope"></div>
+        <div id="frame-4" class="frame"><img src="ada4.jpg" alt="My Love"></div>
+    </div>
+    
+    <div class="button-container">
+        <button class="play-button" onclick="playAudio()">Tekan Ni Sayang! ❤️</button>
+        <div id="cassette" class="cassette"></div>
+    </div>
+    
+    <audio id="bg-music" loop>
+        <source src="adam.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+</html>
